@@ -8,10 +8,6 @@ function isOpenBracket(ch) {
   return ch === '(' || ch === '{' || ch === '[';
 }
 
-function isCloseBracket(ch) {
-  return ch === ')' || ch === '}' || ch === ']';
-}
-
 /**
  * @param {string} s
  * @return {boolean}
