@@ -1,7 +1,5 @@
 package majority_element;
 
-import java.util.Arrays;
-
 public class Solution {
     public static void main(String[] args) {
         int[] nums1 = new int[] { 3, 2, 3 };
@@ -13,8 +11,21 @@ public class Solution {
         assert res2 == 2;
     }
 
-    public int majorityElement(int[] nums) {
-        Arrays.sort(nums);
-        return nums[nums.length / 2];
+    public Integer majorityElement(int[] nums) {
+        int candidate = nums[0];
+        int count = 0;
+
+        for (int num : nums) {
+            if (count == 0) {
+                candidate = num;
+            }
+            if (num == candidate) {
+                count++;
+            } else {
+                count--;
+            }
+        }
+
+        return candidate;
     }
 }
