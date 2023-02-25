@@ -11,7 +11,7 @@ public class Solution {
         assert res2 == 2;
     }
 
-    public Integer majorityElement(int[] nums) {
+    public int majorityElement(int[] nums) {
         int candidate = nums[0];
         int count = 0;
 
