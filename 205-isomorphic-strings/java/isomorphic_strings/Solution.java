@@ -1,9 +1,7 @@
 package isomorphic_strings;
 
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Map;
-import java.util.Set;
 
 public class Solution {
     public static void main(String[] args) {
@@ -21,26 +19,30 @@ public class Solution {
     }
 
     public boolean isIsomorphic(String s, String t) {
-        Map<Character, Character> charMapping = new HashMap<>();
-        Set<Character> tChars = new HashSet<>();
+        char[] sArr = s.toCharArray();
+        char[] tArr = t.toCharArray();
 
-        for (int i = 0; i < s.length(); i++) {
-            char ch1 = s.charAt(i);
-            char ch2 = t.charAt(i);
+        if (sArr.length != tArr.length) {
+            return false;
+        }
 
-            if (!charMapping.containsKey(ch1)) {
-                if (tChars.contains(ch2)) {
-                    return false;
-                }
+        Map<Character, Character> sToT = new HashMap<>();
+        Map<Character, Character> tToS = new HashMap<>();
 
-                charMapping.put(ch1, ch2);
-                tChars.add(ch2);
-                continue;
-            }
+        for (int i = 0; i < tArr.length; i++) {
+            char sChar = sArr[i];
+            char tChar = tArr[i];
 
-            if (charMapping.get(ch1) != ch2) {
+            if (sToT.containsKey(sChar) && sToT.get(sChar) != tChar) {
                 return false;
             }
+
+            if (tToS.containsKey(tChar) && tToS.get(tChar) != sChar) {
+                return false;
+            }
+
+            sToT.put(sChar, tChar);
+            tToS.put(tChar, sChar);
         }
 
         return true;
