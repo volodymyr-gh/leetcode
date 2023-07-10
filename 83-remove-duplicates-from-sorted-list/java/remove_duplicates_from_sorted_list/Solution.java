@@ -22,28 +22,21 @@ public class Solution {
         assert res2.next.next.next == null;
     }
 
-    private static class ListNode {
+    public static class ListNode {
         int val;
         ListNode next;
-        ListNode() {}
-        ListNode(int val) { this.val = val; }
-        ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+        ListNode(int val) {
+            this.val = val;
+        }
     }
 
     public ListNode deleteDuplicates(ListNode head) {
         ListNode curr = head;
-
-        while (curr != null) {
-            ListNode next = curr.next;
-
-            if (next == null) {
-                break;
-            }
-
-            if (next.val == curr.val) {
-                curr.next = next.next == null ? null : next.next;
+        while (curr != null && curr.next != null) {
+            if (curr.next.val == curr.val) {
+                curr.next = curr.next.next;
             } else {
-                curr = next;
+                curr = curr.next;
             }
         }
 
