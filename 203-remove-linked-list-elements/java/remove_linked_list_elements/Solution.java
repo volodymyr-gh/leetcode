@@ -29,35 +29,33 @@ public class Solution {
         assert res3 == null;
     }
 
-    public ListNode removeElements(ListNode head, int val) {
-        ListNode newHead = head;
-        ListNode slow = null;
-        ListNode fast = head;
+    public static class ListNode {
+        int val;
+        ListNode next;
+        ListNode(int val) {
+            this.val = val;
+        }
+    }
 
-        while (fast != null) {
-            if (fast.val != val) {
-                slow = fast;
-                fast = fast.next;
+    public ListNode removeElements(ListNode head, int val) {
+        ListNode prev = null;
+        ListNode curr = head;
+
+        while (curr != null) {
+            if (curr.val != val) {
+                prev = curr;
+                curr = curr.next;
                 continue;
             }
 
-            if (slow == null) {
-                fast = fast.next;
-                newHead = fast;
+            if (prev == null) {
+                head = curr.next;
             } else {
-                slow.next = fast.next;
-                fast = fast.next;
+                prev.next = curr.next;
             }
+            curr = curr.next;
         }
 
-        return newHead;
-    }
-
-    private static class ListNode {
-        int val;
-        ListNode next;
-        ListNode() {}
-        ListNode(int val) { this.val = val; }
-        ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+        return head;
     }
 }
