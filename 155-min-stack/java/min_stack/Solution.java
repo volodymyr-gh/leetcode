@@ -1,5 +1,36 @@
 package min_stack;
 
+import java.util.Stack;
+
+class MinStack {
+
+    private final Stack<int[]> stack;
+
+    public MinStack() {
+        stack = new Stack<>();
+    }
+
+    public void push(int val) {
+        if (stack.isEmpty()) {
+            stack.push(new int[] { val, val });
+        } else {
+            stack.push(new int[] { val, Math.min(val, stack.peek()[1]) });
+        }
+    }
+
+    public void pop() {
+        stack.pop();
+    }
+
+    public int top() {
+        return stack.peek()[0];
+    }
+
+    public int getMin() {
+        return stack.peek()[1];
+    }
+}
+
 public class Solution {
     public static void main(String[] args) {
         MinStack minStack = new MinStack();
@@ -10,46 +41,5 @@ public class Solution {
         minStack.pop();
         assert minStack.top() == 0;
         assert minStack.getMin() == -2;
-    }
-}
-
-class MinStack {
-    private static class StackElement {
-        public final int val;
-        public final int min;
-        public final StackElement next;
-
-        StackElement(int val, int min, StackElement next) {
-            this.val = val;
-            this.min = min;
-            this.next = next;
-        }
-    }
-
-    private StackElement head = null;
-
-    public MinStack() {
-    }
-
-    public void push(int val) {
-        if (head == null) {
-            head = new StackElement(val, val, null);
-        } else {
-            head = new StackElement(val, Math.min(val, head.min), head);
-        }
-    }
-
-    public void pop() {
-        if (head != null) {
-            head = head.next;
-        }
-    }
-
-    public int top() {
-        return head.val;
-    }
-
-    public int getMin() {
-        return head.min;
     }
 }
