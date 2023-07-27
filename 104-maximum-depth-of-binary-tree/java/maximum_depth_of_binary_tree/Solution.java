@@ -30,9 +30,9 @@ public class Solution {
             return 0;
         }
 
-        int lDepth = maxDepth(root.left) + 1;
-        int rDepth = maxDepth(root.right) + 1;
+        int lDepth = maxDepth(root.left);
+        int rDepth = maxDepth(root.right);
 
-        return Math.max(lDepth, rDepth);
+        return Math.max(lDepth, rDepth) + 1;
     }
 }
